@@ -1,0 +1,452 @@
+LOREM IPSUM….
+Wendy Randolph
+From Clojure to Elixir: Leveraging Functional Programming for Scalable, Sustainable Web Apps
+
+Hi, I’m Wendy Randolph! :wave:
+
+
+
+Crazy… or smart? or both?
+Clojure
+
+loading…                                                  still loading …
+YOUNGER ME’S
+BRAIN 
+CELLS
+
+Programming, Clojure, Datomic, Emacs, Web Apps…
+all the things!
+https://hyperboleandahalf.blogspot.com/2010/06/this-is-why-ill-never-be-adult.htm
+YOUNGER ME’S
+BRAIN 
+CELLS
+
+CLOJURE / Coast
+lambdadays.com
+Just some routes…
+
+You’ll pay me to do Elixir?
+$$$$$$$$$
+elixir
+
+ELIXIR / Phoenix / LiveView 
+lambdadays.com
+Just some routes..
+
+What to do with all this functional, immutable, concurrent power?
+lambdadays.com
+
+What to do with all this functional, immutable, concurrent power?
+lambdadays.com
+BUILD WEB APPLICATIONS
+
+                SILLY WEB APPS
+lambdadays.com
+
+WEB APPS
+lambdadays.com
+
+Functional Friends
+
+CLOJURE & ELIXIR
+FUNCTIONAL
+IMMUTABILITY AS ITS CORE
+SYMBIOTIC WITH AN ESTABLISHED VM
+METAPROGRAMMING
+REPL DRIVEN WORKFLOWS
+CONCURRENCY MODELS DON'T SHARE STATE
+SMALL CORE LANGUAGES
+ENTHUSIASTIC COMMUNITIES
+
+     DIFFERENCES
+
+
+
+
+
+CLOJURE  Lisp Dialect
+
+
+     DIFFERENCES
+
+
+
+
+
+
+
+
+
+
+
+
+
+ELIXIR Ruby-like syntax
+
+
+
+
+
+ Concurrency Model
+        CLOJURE 			core.async 
+https://github.com/clojure/core.async/blob/master/examples/walkthrough.clj
+Go Blocks & Channels - Concurrency without Threads
+
+ Concurrency Model
+           CLOJURE      		core.async
+1000 Go Blocks — Massive Concurrency
+
+
+https://github.com/clojure/core.async/blob/master/examples/walkthrough.clj
+
+ Concurrency Model
+core.async.flow
+https://clojure.github.io/core.async/flow.html
+        CLOJURE 			
+
+ Concurrency Model
+           ELIXIR    Actor Model via OTP
+Actor Model
+Open Telecom Platform: The Power Layer
+Example: Process Per Upload:
+
+Safe & Isolated File Handling
+
+
+
+
+
+Simple, sequential Elixir — the VM handles the rest
+
+
+
+JAVA
+
+ERLANG
+lambdadays.com
+
+What stood out to me
+developer experience
+lambdadays.com
+
+CLOJURE
+ Composable, Data-Centric Architecture
+
+Simplicity That Encourages Custom Solutions
+
+FAMOUSLY FLEXIBLE
+
+
+CLOJURE
+ FLEXIBILITY    
+
+CLOJURE
+
+lambdadays.com
+ELIXIR
+PHOENIX
+LIVEVIEW
+
+Elixir Phoenix project initiation 
+lambdadays.com
+mix phx.new your_project_name
+(You’ll be asked to fetch deps; say yes)
+Fetch and install dependencies? [Yn] Y
+
+cd your_project_name
+
+mix ecto.create
+
+mix phx.server
+
+What is it like?
+lambdadays.com
+CLOJURE
+Lots of options: can tailor stack exactly to your needs.
+More modular 
+DX is less guided; you piece things together yourself.
+ELIXIR
+Deep integration: everything works well together (Phoenix + Ecto + LiveView).Strong defaults, great docs, and DX.
+Fewer third-party libraries overall.
+
+CLOJURE: Web App as Functional Composition
+lambdadays.com
+PURE FUNCTIONS 
++ 
+MANIPULATING PLAIN DATA
+NO MAGIC,
+FEELS MAGICAL 
+
+CLOJURE
+• Composable, Data-Centric Architecture
+Build apps by wiring together small, focused libraries around immutable data and pure functions. You stay close to the data—and in control of the flow.
+
+• Simplicity That Encourages Custom Solutions
+Clojure’s minimal abstractions and powerful data structures make it easy to shape your app to fit your problem, not the other way around.
+
+FAMOUSLY FLEXIBLE
+
+
+CLOJURE: Web App as Functional Composition
+lambdadays.com
+
+CLOJURE & Datomic
+lambdadays.com
+
+CLOJURE: Web App as Functional Composition
+lambdadays.com
+PURE FUNCTIONS 
++ 
+MANIPULATING PLAIN DATA
+NO MAGIC,
+FEELS MAGICAL 
+
+CLOJURE: Web App as Functional Composition
+lambdadays.com
+
+CLOJURE: Web App as Functional Composition
+lambdadays.com
+
+CLOJURE: Web App as Functional Composition
+lambdadays.com
+
+ELIXIR + PHOENIX + LIVEVIEW
+lambdadays.com
+vs “traditional” stacks
++-----------------------+
+|   Frontend (JS/HTML) |
+|  - UI                 |
+|  - User Events        |
++-----------------------+
+           |
+           v
++-----------------------+
+|   API (JSON)          |
+|  - Routing              |
+|  - Validation Logic   |
++-----------------------+
+
+
+
++-----------------------+
+|   Server (Rails/Node) |
+|  - State Changes      |
+|  - Persistence        |
++-----------------------+
+           |
+           v
++-----------------------+
+|   WebSockets Layer    |
+|  - Real-time Push     |
++-----------------------+
+
+
+LiveView = Real-Time UI as a Process
+lambdadays.com
++--------------------------------------+
+| LiveView Process (per user)       	  
+|  - UI: <.form> <.modal>            	
+|  - Events: phx-submit, phx-click    
+|  - State: assigns, flash            
+|  - Validation + Save logic          
+|  - Realtime out of the box         
+|  - Fault-tolerant via OTP           
++--------------------------------------+
+
+
+
+LiveView = Real-Time UI as a Process
+lambdadays.com
+defmodule FabricExWeb.HomeLive do
+ use FabricExWeb, :live_view ...
+<.simple_form for={@form} phx-change="validate” phx-submit="save_fabric"> ...
+def handle_event("save_fabric", %{"fabric" => fabric_params}, socket) do ...  
+socket
+|> update(:fabrics, fn fabrics -> fabrics ++ ["fabric"] ...
+end ...
+end
+This LiveView is an Elixir process — meaning it’s supervised, restartable, and isolated.
+
+LiveView = Real-Time UI as a Process
+lambdadays.com
+defmodule FabricExWeb.HomeLive do
+ use FabricExWeb, :live_view …
+<.simple_form for={@form} phx-change="validate” phx-submit="save_fabric"> …
+def handle_event("save_fabric", %{"fabric" => fabric_params}, socket) do   …   
+socket
+|> update(:fabrics, fn fabrics ->
+   fabrics ++ ["fabric"]
+end
+end
+Every LiveView is a supervised OTP process. If something fails — a bug, a network hiccup — it gets restarted cleanly.
+
+Elixir, Phoenix, LiveView Considerations
+lambdadays.com
+
+
+
+LiveView feels like magic ✨… until it doesn’t
+Magic Behind the Scenes:  LiveView lifecycle (mount > update > render > push diff)
+State Lives On the Server: IO.inspect is your friend
+Overall, can feel like backend debugging for frontend problem 
+can take a bit to internalize the full flow of state and events
+
+Which ecosystem appeals to you more?
+
+Connect with me
+questions? come find me in the hallway
+wendyrandolph.com
+wendy.randolph5@gmail.com
+linkedin
+github :  the-dress-code
+
+THE END
+
+wtybybwyumoim dj 
+
+What stood out to me
+ dr rr dr drh d
+lambdadays.com
+
+Java is valid clojure code
+ vast
+lambdadays.com
+
+CLOJURE 
+^ AI Generated image (obviously)
+^ photograph of reality
+
+CLOJURE
+(defn routes
+ []
+ (coast/routes
+   (coast/site
+   []
+     (coast/with middleware/auth
+       [:get "/dashboard" :member/dashboard]
+       [:delete "/sessions" :session/delete])
+    (coast/with middleware/gate-keeper
+                (coast/with-layout components/layout
+                  [:get "/" :site.home/index]
+                  [:get "/sign-up" :member/build]
+                  [:post "/members" :member/create]
+                  [:get "/login" :session/build]
+                  [:post "/sessions" :session/create]
+                  [:get "/fabrics/search" :fabric/search]
+                  [:get "/fabrics/answers" :fabric/answers]
+                 
+                  [:resource :fabric]))
+
+lambdadays.com
+
+CLOJURE
+lambdadays.com
+Clojure
+
+CLOJURE
+label as AI, if using
+screen recording of scrolling through clojars
+i dont know about you right now
+
+ELIXIR
+ scope "/", FabricExWeb do
+   pipe_through [:browser, :redirect_if_user_is_authenticated]
+
+   get "/", PageController, :home
+
+   live_session :redirect_if_user_is_authenticated,
+     on_mount: [{FabricExWeb.UserAuth, :redirect_if_user_is_authenticated}] do
+     live "/users/register", UserRegistrationLive, :new
+     live "/users/log_in", UserLoginLive, :new
+     live "/users/reset_password", UserForgotPasswordLive, :new
+     live "/users/reset_password/:token", UserResetPasswordLive, :edit
+   end
+
+   post "/users/log_in", UserSessionController, :create
+ end
+
+
+avsdbadbbdbdb
+CLOJUREsdbsdbsbsdb
+ELIXIR
+dbsdbdbdbd
+
+
+Programming, Clojure, Emacs, Web Apps…
+all the things
+https://hyperboleandahalf.blogspot.com/2010/06/this-is-why-ill-never-be-adult.htm
+
+LiveView = Real-Time UI as a Process
+lambdadays.com
+defmodule FabricExWeb.HomeLive do
+  use FabricExWeb, :live_view
+…
+<.simple_form for={@form} phx-change="validate" phx-submit="save_fabric">
+…
+  def handle_event("save_fabric", %{"fabric" => params}, socket) do
+    ...
+    update(:fabrics, fn fs -> fs ++ ["fabric"] end)
+  end
+
+<.live_title><%= @page_title %></.live_title> + @current_user in the navbar
+FIX THE CODE
+
+ELIXIR
+  LiveView as Process
+Every LiveView is a supervised OTP process. If something fails — a bug, a network hiccup — it gets restarted cleanly.
+
+ Concurrency Model
+           ELIXIR            Actor Model via OTP
+# Upload config in LiveView:
+|> allow_upload(:image, accept: ~w(.jpg .png), max_entries: 1)
+
+# HEEx input:
+<.live_file_input upload={@uploads.image} />
+
+# File handling:
+consume_uploaded_entries(socket, :image, fn %{path: path}, _entry ->
+  dest = Path.join(["priv/static/uploads", Path.basename(path)])
+  File.cp!(path, dest)
+end)
+
+
+VERIFY CODE
+
+ELIXIR
+User Events → Server State → Live UI
+…
+…
+…
+
+ Concurrency Models
+           ELIXIR             Processes 
+
+
+https://blog.elixirmasters.com/understanding-concurrency-in-elixir-key-practices-and-examples
+
+ Concurrency Models
+           ELIXIR             Message Passing 
+
+
+https://blog.elixirmasters.com/understanding-concurrency-in-elixir-key-practices-and-examples
+
+ Concurrency Models
+           ELIXIR            Task Module
+
+https://blog.elixirmasters.com/understanding-concurrency-in-elixir-key-practices-and-examples
+
+ Concurrency Models
+           ELIXIR            GenServer, part 1
+
+https://blog.elixirmasters.com/understanding-concurrency-in-elixir-key-practices-and-examples
+
+ Concurrency Models
+           ELIXIR            GenServer, part 2
+
+https://blog.elixirmasters.com/understanding-concurrency-in-elixir-key-practices-and-examples
+
+ Concurrency Model
+           CLOJURE             alts!! + Massive Concurrency
+
+
+https://github.com/clojure/core.async/blob/master/examples/walkthrough.clj
