@@ -3,31 +3,40 @@ marp: true
 paginate: true
 theme: default
 ---
-<!-- These notes will not show up in the slides. -->
 
-# Slide 1 Title
-- Bullet 1
-- Bullet 2
+# From Clojure to Elixir: Leveraging Functional Programming for Scalable, Sustainable Web Apps
+# Wendy Randolph
+ Lambda World 2025
+ Cádiz, Spain
+
+<!--
+Good morning! I am Wendy Randolph. You may know me from ...
+-->
 
 ---
 
+# You may know me from...
+[ insert images from past conferences ]
+![Image alt text](images/example.png)
+
+
 <!--
-SCRIPT: Slide 1
-
-This is my full spoken script for Slide 1. It is visible in VS Code while editing,
-but Marp ignores this comment so it will NOT appear on the slide.
-You can write multiple paragraphs here.
+Clojure Camp, ClojureConj, ElixirConf US, Heart of Clojure.
 -->
-
-# Slide 2 Title
-- Main point
-- Supporting detail
-- ![Image alt text](images/example.png)
 
 ---
 
-<!--
-SCRIPT: Slide 2
+# Clojure & Elixir
+[ insert language names, logo, hearts ]
 
-Full narration for Slide 2 goes here. It stays in the editor but is invisible in the slide preview.
+
+<!--
+Today, I'm going to talk to you about two languages that are near and
+dear to my heart : Clojure and Elixir!
+
+Quick show of hands: who's written Clojure? Elixir? Built web apps?
+Great, we have a good mix. Maybe you'll find some answers to the web app
+problems that keep you up at night.
 -->
+
+---
