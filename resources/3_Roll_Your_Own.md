@@ -1,0 +1,1 @@
+    * Clojure: I was scared off of rolling my own stack. Now that I am a little more experienced, rolling my own stack seems more doable.
