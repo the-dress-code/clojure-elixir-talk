@@ -5,6 +5,8 @@
 
 1. Clojure: how important the repl was - when was the last time the thing you were learning gave you instant feedback?
 
+Note: stop trying to make this perfect - get out your general ideas - sketch an outline
+
 ----
 
 # What?
