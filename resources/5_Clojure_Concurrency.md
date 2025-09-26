@@ -57,8 +57,8 @@ i dont know yet
 # Post diagram exercise summary
 
 - abstractions that let you separate "do" from "here is this thing" and "use this thing"
-- queue the process (with channels)
-- create the process (with a go block) - u can have tons of go blocks
+- queue data (with channels)
+- create processes (with a go block) - u can have tons of go blocks
 - 1. (go (>! d (stuff (<! c))))
 - 2. (>! c "What's up")
 - 3. (<! d)
@@ -71,3 +71,42 @@ i dont know yet
 
 (<! d)
 > says take what is on channel d
+
+# What do you want to say about core.async?
+> try it in mostly your own words
+
+“In Elixir, we model concurrency with isolated processes that communicate via messages — the actor model. In Clojure, a comparable approach is provided by core.async, which implements Communicating Sequential Processes with channels and lightweight go blocks.”
+
+core.async provides abstractions that let you separate "do something with this data" from "here is some data" and "use this data". You can queue data with channels and create processes with go blocks (and you can have a great number of go blocks.)
+
+for example,
+
+(let [in-chan (chan 1)
+      out-chan (chan 1)]
+    (>!! in-chan "Bom dia")
+    (go (>! out-chan (str "Hi, or " (<! in-chan))))
+    (<!! out-chan))
+
+with chan - we queue data on a channel
+with >!! - we blocking put "Bom dia" on the in-chan
+-- we can read the expression from the right to the left --
+with <! - we take off what is on the in-chan
+then we do something with the value
+with >! - we put the result on the out-chan
+`go` macro asynchronously executes its body in a special pool of threads - so go creates the process
+with <!! - we blocking take from out-chan
+
+Then we get Hi, or Bom Dia!
+
+So we can
+- queue data (with channels)
+- and create async processes (with go blocks - which you can have many of)
+- its that simple.
+
+“E não é só isso!” (And that’s not all!)
+“Mas calma, tem mais!” (But wait, there’s more!)
+
+----------
+take it to a new level with
+
+async.flow
