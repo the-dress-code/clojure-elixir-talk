@@ -79,21 +79,22 @@ i dont know yet
 
 core.async provides abstractions that let you separate "do something with this data" from "here is some data" and "use this data". You can queue data with channels and create processes with go blocks (and you can have a great number of go blocks.)
 
-for example,
+# Example 1
 
-(let [in-chan (chan 1)
-      out-chan (chan 1)]
-    (>!! in-chan "Bom dia")
+(let [in-chan (chan)
+      out-chan (chan)]
     (go (>! out-chan (str "Hi, or " (<! in-chan))))
+    (>!! in-chan "Bom dia")
     (<!! out-chan))
+;; => "Hi, or Bom dia"
 
-with chan - we queue data on a channel
-with >!! - we blocking put "Bom dia" on the in-chan
+with chan - we queue data on 2 channels
 -- we can read the expression from the right to the left --
 with <! - we take off what is on the in-chan
 then we do something with the value
 with >! - we put the result on the out-chan
 `go` macro asynchronously executes its body in a special pool of threads - so go creates the process
+with >!! - we blocking put "Bom dia" on the in-chan
 with <!! - we blocking take from out-chan
 
 Then we get Hi, or Bom Dia!
@@ -103,10 +104,75 @@ So we can
 - and create async processes (with go blocks - which you can have many of)
 - its that simple.
 
-“E não é só isso!” (And that’s not all!)
-“Mas calma, tem mais!” (But wait, there’s more!)
+# Example 2
 
-----------
-take it to a new level with
+description:
+what if that go block was a go-loop
+that was processing anything that you put on the channel
+until the channel had “exit” on it
+meaning, if the string “exit” gets put on the channel, the loop stops
+go-loop is a loop/recur
+so exit is just “don’t recur now”
 
-async.flow
+so you could put multiple things on the channel at diff times
+
+------------------------
+
+[Slide With Diagram]
+
+Let’s say you are collecting clojure exercises from the community to build out a Clojure Exercises web app. A user can submit their idea. Their submission goes on a channel to get processed - scraped, categorized, written to the database - and then put on another channel - maybe you have a feed for special members to preview exercises that are not yet live on the website. We can start with our first two channels:
+
+[Slide with Code]
+
+(let [in-chan (chan)
+      out-chan (chan)]
+  (go-loop []
+    (let [exercise (<! in-chan)]
+      (if (= exercise "monads-forever")
+        (>! out-chan "Sorry, we're closed. Nobody wants to hear about monads!")
+        (do
+          (>! out-chan (str "Processed exercise: " exercise))
+          (recur)))))
+  (>!! in-chan "core.async-for-everyone")
+  (println (<!! out-chan))
+
+  (>!! in-chan "transducers-simplified")
+  (println (<!! out-chan))
+
+  (>!! in-chan "monads-forever")
+  (println (<!! out-chan)))
+
+returns
+
+Processed exercise: core.async-for-everyone
+Processed exercise: transducers-simplified
+Sorry, we're closed. Nobody wants to hear about monads!
+
+What is happening here?
+
+- with chan, we establish a channel, which you can think of as a pipe or queue.
+- with go-loop, we establish a loop with the`go` macro which asynchronously executes its body in a special pool of threads - so here is where we create the process
+- with take in-chan, we get the value off that channel and are binding it to "exercise"
+- If our exercise is..
+
+TODO: Finish describing code
+
+[Slide with code and output]
+
+the result?
+
+we get back what is on the out-chan each time we do a blocking take. And in this case, the go loop stops when someone suggests we explain monads,
+
+[ Slide with bruno ]
+
+because "we dont talk about monads".
+
+So this is a silly example shows the basics of
+- queue data (with channels)
+- create processes (with go blocks - you can have multiple)
+
+[ Slide with list of a few more fns re:chan ]
+
+It gets really interesting with how you can manage your channels with:
+
+alt!, mix, split, set a buffer size, drop or slide buffer size, subscribe / unsubscribe a chan to topics of a pub, map, merge, much more!
